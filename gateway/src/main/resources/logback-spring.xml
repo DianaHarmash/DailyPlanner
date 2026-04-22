@@ -1,0 +1,23 @@
+<!-- src/main/resources/logback-spring.xml -->
+<configuration>
+    <springProperty name="APP_NAME" source="spring.application.name"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss} %highlight(%-5level) %cyan([${APP_NAME}]) %yellow(%logger{36}) - %highlight(%msg%n)
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Твои классы — DEBUG уровень для подробных логов -->
+    <logger name="com.dailyserver" level="DEBUG"/>
+
+    <!-- Убрать лишний шум от Hibernate -->
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.orm.jdbc.bind" level="TRACE"/>
+</configuration>

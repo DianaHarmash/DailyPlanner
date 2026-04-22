@@ -1,0 +1,42 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: backend        # ← по этому имени Feign найдёт сервис
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dailyplanner
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update   # автоматически создаёт таблицы из @Entity
+    show-sql: true
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+  output:
+     ansi:
+      enabled: always   # принудительно включить цвета (по умолчанию auto)
+
+logging:
+  level:
+    root: INFO                              # общий уровень
+    com.dailyserver: DEBUG                  # твой код — максимум деталей
+    org.springframework.web: DEBUG          # HTTP запросы
+    org.springframework.cloud: DEBUG        # Eureka, Feign, Gateway
+    org.hibernate.SQL: DEBUG                # SQL запросы (только backend)
+    org.hibernate.type.descriptor.sql: TRACE # значения параметров в SQL
+  pattern:
+    console: "%d{HH:mm:ss} [%thread] %-5level %logger{36} - %highlight(%msg%n)"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

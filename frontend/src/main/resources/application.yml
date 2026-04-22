@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: frontend
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true   # включает Resilience4J для Feign
+  output:
+    ansi:
+      enabled: always   # принудительно включить цвета (по умолчанию auto)
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
