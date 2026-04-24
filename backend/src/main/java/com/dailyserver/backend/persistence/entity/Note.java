@@ -55,7 +55,12 @@ public class Note {
     @Column(name = "weight", nullable = false)
     private Double weight;
 
-    @OneToMany(mappedBy = "note")
+    @ManyToMany
+    @JoinTable(
+            name = "note_food",
+            joinColumns = @JoinColumn(name = "note_id"),
+            inverseJoinColumns = @JoinColumn(name = "food_id")
+    )
     private Set<Food> foods;
 
     @Column(name = "note_date", nullable = false)
