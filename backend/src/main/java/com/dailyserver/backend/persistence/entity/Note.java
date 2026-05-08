@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class Note {
 
     @Id
@@ -55,11 +57,17 @@ public class Note {
     @Column(name = "weight", nullable = false)
     private Double weight;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "note_food",
-            joinColumns = @JoinColumn(name = "note_id"),
-            inverseJoinColumns = @JoinColumn(name = "food_id")
+            joinColumns = @JoinColumn(
+                    name = "note_id",
+                    foreignKey = @ForeignKey(foreignKeyDefinition = "FOREIGN KEY (note_id) REFERENCES note(id) ON DELETE CASCADE")
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "food_id",
+                    foreignKey = @ForeignKey(foreignKeyDefinition = "FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE")
+            )
     )
     private Set<Food> foods;
 

@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Formula;
+import lombok.Setter;
 
 @Entity
 @Table(name = "food")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class Food {
 
     @Id
@@ -27,6 +28,5 @@ public class Food {
     private Integer weight;
 
     @Column(name = "kkal")
-    @Formula("kkalPer100 * weight")
     private Integer kkal;
 }

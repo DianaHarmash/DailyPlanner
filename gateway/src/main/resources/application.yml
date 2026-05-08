@@ -6,17 +6,11 @@ spring:
     name: gateway
   output:
     ansi:
-      enabled: always   # принудительно включить цвета (по умолчанию auto)cloud:
+      enabled: always   # принудительно включить цвета (по умолчанию auto)
+  cloud:
     gateway:
-      routes:
-        - id: backend
-          uri: lb://backend          # lb:// = через Eureka + балансировка
-          predicates:
-            - Path=/api/**           # всё что /api/* → идёт на backend
-        - id: frontend
-          uri: lb://frontend
-          predicates:
-            - Path=/**               # всё остальное → на frontend
+      mvc:
+        enabled: true
 
 eureka:
   client:

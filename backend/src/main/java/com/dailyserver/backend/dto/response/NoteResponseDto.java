@@ -1,6 +1,5 @@
-package com.dailyserver.backend.dto;
+package com.dailyserver.backend.dto.response;
 
-import com.dailyserver.backend.persistence.entity.Food;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -21,7 +20,7 @@ public class NoteResponseDto {
     private final List<String> health;
     private final List<String> description;
     private final double weight;
-    private final Set<Food> foods;
+    private final Set<FoodResponseDto> foods;
     private final LocalDate noteDate;
     private final LocalDateTime createdAt;
 }
